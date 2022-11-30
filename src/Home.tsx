@@ -1,7 +1,7 @@
 import React, { createRef, useEffect, useRef } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import axios from "axios";
+import axios from "./api/axios";
 import NavBar from "./NavBar";
 
 function Home() {
@@ -23,7 +23,7 @@ function Home() {
   };
   useEffect(() => {
     axios
-      .get("http://localhost:8000/categories", {
+      .get("categories", {
         params: {
           username: "john1904",
         },
