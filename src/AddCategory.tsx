@@ -21,7 +21,11 @@ const AddCategory = () => {
   };
   return (
     <div>
-      <form onSubmit={(e) => {}}>
+      <form
+        onSubmit={(e) => {
+          uploadImage(e);
+        }}
+      >
         <input type="file" name="image" onChange={(e) => handleFile(e)} />
         <button type="submit">submit</button>
       </form>
