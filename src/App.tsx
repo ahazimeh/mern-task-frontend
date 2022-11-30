@@ -32,10 +32,10 @@ function App() {
       });
   });
   const myRef = useRef<HTMLDivElement>(null);
-  const elementsRef: any = useRef(menu.categories.map(() => createRef()));
+  const elementsRef = useRef(
+    menu.categories.map(() => createRef<HTMLDivElement>())
+  );
   const executeScroll = () => {
-    console.log(elementsRef);
-    console.log("aa");
     elementsRef?.current[0].current?.scrollIntoView({ behavior: "smooth" });
   };
   return (

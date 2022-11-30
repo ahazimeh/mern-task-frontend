@@ -2,11 +2,10 @@ import axios from "axios";
 import { useState } from "react";
 
 const AddCategory = () => {
-  const [image, setImage] = useState("");
-  const uploadImage = (event: any) => {
+  const [image, setImage] = useState<Blob | string>("");
+  const uploadImage = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     let formData = new FormData();
-    console.log(image);
     formData.append("image", image, "image");
     axios({
       url: "http://localhost:8000/image",
@@ -16,15 +15,13 @@ const AddCategory = () => {
       console.log(res);
     });
   };
-  const handleFile = (e: any) => {
-    e.stopPropagation();
-    e.preventDefault();
-    setImage(e.target.files[0]);
-    console.log(e.target.files[0]);
+  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files![0];
+    setImage(file || "");
   };
   return (
     <div>
-      <form onSubmit={uploadImage}>
+      <form onSubmit={(e) => {}}>
         <input type="file" name="image" onChange={(e) => handleFile(e)} />
         <button type="submit">submit</button>
       </form>
