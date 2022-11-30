@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Home";
 import AddCategory from "./AddCategory";
+import RequireAuth from "./RequireAuth";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -15,7 +16,9 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/addCategory" element={<AddCategory />}></Route>
+        <Route element={<RequireAuth />}>
+          <Route path="/addCategory" element={<AddCategory />}></Route>
+        </Route>
       </Routes>
       {/* <App /> */}
     </BrowserRouter>
