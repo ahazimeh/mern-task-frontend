@@ -1,6 +1,7 @@
-import React, { createRef, useRef } from "react";
+import React, { createRef, useEffect, useRef } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import axios from "axios";
 
 function App() {
   const menu = {
@@ -19,6 +20,17 @@ function App() {
       },
     ],
   };
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/categories", {
+        params: {
+          username: "john1904",
+        },
+      })
+      .then(function (response) {
+        console.log(response);
+      });
+  });
   const myRef = useRef<HTMLDivElement>(null);
   const elementsRef: any = useRef(menu.categories.map(() => createRef()));
   const executeScroll = () => {
