@@ -2,6 +2,7 @@ import React, { createRef, useEffect, useRef } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import axios from "axios";
+import NavBar from "./NavBar";
 
 function Home() {
   const menu = {
@@ -31,7 +32,6 @@ function Home() {
         console.log(response);
       });
   });
-  const myRef = useRef<HTMLDivElement>(null);
   const elementsRef = useRef(
     menu.categories.map(() => createRef<HTMLDivElement>())
   );
@@ -40,6 +40,7 @@ function Home() {
   };
   return (
     <div>
+      <NavBar />
       <div onClick={executeScroll}>menu</div>
       <div
         style={{
