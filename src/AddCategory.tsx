@@ -8,7 +8,7 @@ const AddCategory = () => {
     let formData = new FormData();
     formData.append("image", image, "image");
     axios({
-      url: "http://localhost:8000/image",
+      url: "image",
       method: "post",
       data: formData,
     }).then((res) => {
