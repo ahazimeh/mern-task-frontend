@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Home";
 import AddCategory from "./AddCategory";
 import RequireAuth from "./RequireAuth";
+import Login from "./Login";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -16,6 +17,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />}></Route>
+        <Route path="/login" element={<Login />}></Route>
         <Route element={<RequireAuth />}>
           <Route path="/addCategory" element={<AddCategory />}></Route>
         </Route>
