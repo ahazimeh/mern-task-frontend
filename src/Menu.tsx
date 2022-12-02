@@ -1,3 +1,4 @@
+import { createRef, useRef } from "react";
 import styles from "./Menu.module.css";
 export function Menu() {
   const menu = {
@@ -50,6 +51,13 @@ export function Menu() {
       },
     ],
   };
+
+  const elementsRef = useRef(
+    menu.categories.map(() => createRef<HTMLDivElement>())
+  );
+  const executeScroll = (i: number) => {
+    elementsRef?.current[i].current?.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <div>
       <div
@@ -68,7 +76,11 @@ export function Menu() {
             console.log(cat);
             return (
               <>
-                <a href={`#cat-${index}`}>
+                <a
+                  onClick={() => {
+                    executeScroll(index);
+                  }}
+                >
                   <div
                     className={`${styles["w3-third"]} ${
                       styles["w3-padding-large"]
@@ -92,11 +104,11 @@ export function Menu() {
                   id="pasta"
                   className={`${styles["w3-center"]} ${styles["w3-jumbo"]} ${styles["w3-padding-32"]}`}
                 >
-                  PASTA1
+                  {cat.name}
                 </h1>
               )}
               <div
-                id={`cat-${index}`}
+                ref={elementsRef.current[index]}
                 className={`${styles["w3-container"]} ${styles["w3-white"]} ${styles["w3-padding-32"]}`}
               >
                 {cat.items.map((item, i) => {
