@@ -1,88 +1,129 @@
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "./api/axios";
 
-const menu = {
-  categories: [
-    {
-      name: "Platters1",
-      image: "https://via.placeholder.com/150",
-      items: [
-        {
-          name: "Chicken Platter",
-          description:
-            "4 chicken pieces with our special sauce served with bbq dip and wedges",
-          price: 160000,
-          image: "https://via.placeholder.com/150",
-        },
-      ],
-    },
-    {
-      name: "Platters2",
-      image: "https://via.placeholder.com/150",
-      items: [
-        {
-          name: "Chicken Platter",
-          description:
-            "4 chicken pieces with our special sauce served with bbq dip and wedges",
-          price: 160000,
-          image: "https://via.placeholder.com/150",
-        },
-      ],
-    },
-    {
-      name: "Platters3",
-      image: "https://via.placeholder.com/150",
-      items: [
-        {
-          name: "Chicken Platter",
-          description:
-            "4 chicken pieces with our special sauce served with bbq dip and wedges",
-          price: 160000,
-          image: "https://via.placeholder.com/150",
-        },
-        {
-          name: "Chicken Platter",
-          description:
-            "4 chicken pieces with our special sauce served with bbq dip and wedges",
-          price: 160000,
-          image: "https://via.placeholder.com/150",
-        },
-      ],
-    },
-  ],
-};
+// const menu = {
+//   categories: [
+//     {
+//       name: "Platters1",
+//       image: "https://via.placeholder.com/150",
+//       items: [
+//         {
+//           name: "Chicken Platter",
+//           description:
+//             "4 chicken pieces with our special sauce served with bbq dip and wedges",
+//           price: 160000,
+//           image: "https://via.placeholder.com/150",
+//         },
+//       ],
+//     },
+//     {
+//       name: "Platters2",
+//       image: "https://via.placeholder.com/150",
+//       items: [
+//         {
+//           name: "Chicken Platter",
+//           description:
+//             "4 chicken pieces with our special sauce served with bbq dip and wedges",
+//           price: 160000,
+//           image: "https://via.placeholder.com/150",
+//         },
+//       ],
+//     },
+//     {
+//       name: "Platters3",
+//       image: "https://via.placeholder.com/150",
+//       items: [
+//         {
+//           name: "Chicken Platter",
+//           description:
+//             "4 chicken pieces with our special sauce served with bbq dip and wedges",
+//           price: 160000,
+//           image: "https://via.placeholder.com/150",
+//         },
+//         {
+//           name: "Chicken Platter",
+//           description:
+//             "4 chicken pieces with our special sauce served with bbq dip and wedges",
+//           price: 160000,
+//           image: "https://via.placeholder.com/150",
+//         },
+//       ],
+//     },
+//   ],
+// };
 
 function Categories() {
   const [show, setShow] = useState(false);
   const [itemId, setItemId] = useState(0);
   const [image, setImage] = useState<Blob | string>("");
-
-  const handleClose = () => {
+  const [category, setCategory] = useState("");
+  const [menu, setMenu] = useState<any>();
+  useEffect(() => {
+    getAllCategories();
+  }, []);
+  const handleCloseAndSave = () => {
     setShow(false);
     uploadImage();
   };
-  const handleShow = (id: number) => {
+
+  const handleClose = () => {
+    setShow(false);
+    // uploadImage();
+  };
+
+  const handleShow = (index: number) => {
     setImage("");
-    setItemId(id);
+    if (index !== -1) {
+      setItemId(
+        // +menu?.categories?[index]?.name ||
+        0
+      );
+    }
+    // setItemId(id);
     setShow(true);
     // uploadImage();
   };
 
-  const uploadImage = () => {
+  const getAllCategories = async () => {
+    const categories = await axios.get("http://localhost:8000/categories", {
+      params: {
+        username: "john1904",
+      },
+    });
+    console.log(categories);
+    setMenu(categories.data.menu);
+  };
+  const uploadImage = async () => {
+    if (!category || (!image && !itemId)) {
+      return;
+    }
     // event.preventDefault();
     let formData = new FormData();
     console.log("a", image);
-    formData.append("image", image, "image");
-    axios({
-      url: "image",
-      method: "post",
-      data: formData,
-    }).then((res) => {
-      console.log(res);
-    });
+    if (image) formData.append("image", image, "image");
+    if (category) formData.append("name", category);
+    setCategory("");
+    setImage("");
+    if (!itemId) {
+      await axios({
+        url: "addCategory",
+        method: "post",
+        data: formData,
+      });
+      getAllCategories();
+      return;
+    } else {
+      axios({
+        url: `updateCategory/${itemId}`,
+        method: "post",
+        data: formData,
+      });
+      getAllCategories();
+      return;
+    }
   };
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log("asd");
@@ -93,7 +134,8 @@ function Categories() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow.bind(null, 0)}>
+      {category}
+      <Button variant="primary" onClick={handleShow.bind(null, -1)}>
         Launch demo modal
       </Button>
 
@@ -106,11 +148,12 @@ function Categories() {
           <div className="form-group">
             <label htmlFor="exampleInputEmail1">Category Name</label>
             <input
-              type="email"
+              type="text"
               className="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
-              placeholder="Enter email"
+              placeholder="Enter Category"
+              onChange={(e) => setCategory(e.target.value)}
             />
             <small id="emailHelp" className="form-text text-muted">
               We'll never share your email with anyone else.
@@ -122,7 +165,7 @@ function Categories() {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleCloseAndSave}>
             Save Changes
           </Button>
         </Modal.Footer>
@@ -137,7 +180,8 @@ function Categories() {
           </tr>
         </thead>
         <tbody>
-          {menu.categories.map((cat, index) => {
+          {menu?.map((cat: any, index: any) => {
+            console.log("Asdsa");
             return (
               <tr>
                 <td>num</td>
