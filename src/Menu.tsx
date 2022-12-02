@@ -1,7 +1,88 @@
 import styles from "./Menu.module.css";
 export function Menu() {
+  const menu = {
+    categories: [
+      {
+        name: "Platters1",
+        image: "https://via.placeholder.com/150",
+        items: [
+          {
+            name: "Chicken Platter",
+            description:
+              "4 chicken pieces with our special sauce served with bbq dip and wedges",
+            price: 160000,
+            image: "https://via.placeholder.com/150",
+          },
+        ],
+      },
+      {
+        name: "Platters2",
+        image: "https://via.placeholder.com/150",
+        items: [
+          {
+            name: "Chicken Platter",
+            description:
+              "4 chicken pieces with our special sauce served with bbq dip and wedges",
+            price: 160000,
+            image: "https://via.placeholder.com/150",
+          },
+        ],
+      },
+      {
+        name: "Platters3",
+        image: "https://via.placeholder.com/150",
+        items: [
+          {
+            name: "Chicken Platter",
+            description:
+              "4 chicken pieces with our special sauce served with bbq dip and wedges",
+            price: 160000,
+            image: "https://via.placeholder.com/150",
+          },
+          {
+            name: "Chicken Platter",
+            description:
+              "4 chicken pieces with our special sauce served with bbq dip and wedges",
+            price: 160000,
+            image: "https://via.placeholder.com/150",
+          },
+        ],
+      },
+    ],
+  };
   return (
-    <>
+    <div>
+      <div
+        id="menu"
+        className={`${styles["w3-container"]} ${styles["w3-black"]} ${styles["w3-xxlarge"]}  ${styles["w3-padding-64"]} `}
+      >
+        <h1
+          className={`${styles["w3-center"]} ${styles["w3-jumbo"]} ${styles["w3-padding-32"]}`}
+        >
+          THE MENU
+        </h1>
+        <div
+          className={`${styles["w3-row"]} ${styles["w3-center"]} ${styles["w3-border"]} ${styles["w3-border-dark-grey"]}`}
+        >
+          {menu.categories.map((cat, index) => {
+            console.log(cat);
+            return (
+              <>
+                <a href={`#cat-${index}`}>
+                  <div
+                    className={`${styles["w3-third"]} ${
+                      styles["w3-padding-large"]
+                    } ${/*styles["w3-red"]*/ " "}`}
+                  >
+                    {cat.name}
+                    <img height="30px" src={cat.image} />
+                  </div>
+                </a>
+              </>
+            );
+          })}
+        </div>
+      </div>
       <div
         id="menu"
         className={`${styles["w3-container"]} ${styles["w3-black"]} ${styles["w3-xxlarge"]}  ${styles["w3-padding-64"]} `}
@@ -19,6 +100,7 @@ export function Menu() {
               className={`${styles["w3-third"]} ${styles["w3-padding-large"]} ${styles["w3-red"]}`}
             >
               Pizza
+              <img height="30px" src="https://via.placeholder.com/150" />
             </div>
           </a>
           <a href="#pasta">
@@ -43,6 +125,7 @@ export function Menu() {
         >
           <h1>
             <b>Margherita</b>{" "}
+            <img height="30px" src="https://via.placeholder.com/150" />
             <span
               className={`${styles["w3-right"]} ${styles["w3-tag"]} ${styles["w3-dark-grey"]} ${styles["w3-round"]}`}
             >
@@ -192,6 +275,6 @@ export function Menu() {
           </p>
         </div>
       </div>
-    </>
+    </div>
   );
 }
