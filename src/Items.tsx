@@ -60,7 +60,10 @@ function Items() {
   const [show, setShow] = useState(false);
   const [itemId, setItemId] = useState<number | string>(0);
   const [image, setImage] = useState<Blob | string>("");
-  const [category, setCategory] = useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+
   const [menu, setMenu] = useState<any>();
 
   const { categoryId } = useParams();
@@ -89,8 +92,11 @@ function Items() {
   const handleShow = (index: number) => {
     setImage("");
     if (index !== -1) {
-      setCategory(menu[index]?.name);
-      setItemId(menu[index]?._id || 0);
+      console.log("asdasdas", menu);
+      setName(menu.items[index]?.name);
+      setDescription(menu.items[index]?.description);
+      setPrice(menu.items[index]?.price);
+      setItemId(menu.items[index]?._id || 0);
     }
     // setItemId(id);
     setShow(true);
@@ -109,14 +115,16 @@ function Items() {
     setMenu(categories.data.menu);
   };
   const uploadImage = async () => {
-    if (!category || (!image && !itemId)) {
+    if (!name) {
       return;
     }
     // event.preventDefault();
     let formData = new FormData();
     if (image) formData.append("image", image, "image");
-    if (category) formData.append("name", category);
-    setCategory("");
+    if (name) formData.append("name", name);
+    if (description) formData.append("description", description);
+    if (price) formData.append("price", price);
+    setName("");
     setImage("");
     if (!itemId) {
       await axios({
@@ -143,7 +151,7 @@ function Items() {
 
   return (
     <>
-      {category}
+      {name}
       <Button variant="primary" onClick={handleShow.bind(null, -1)}>
         Launch demo modal
       </Button>
@@ -162,12 +170,28 @@ function Items() {
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="Enter Category"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
-            <small id="emailHelp" className="form-text text-muted">
-              We'll never share your email with anyone else.
-            </small>
+            <input
+              type="text"
+              className="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Enter Category"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+
+            <input
+              type="text"
+              className="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Enter Category"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
           </div>
           <input type="file" name="image" onChange={(e) => handleFile(e)} />
         </Modal.Body>
