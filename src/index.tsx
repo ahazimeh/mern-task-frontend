@@ -8,6 +8,8 @@ import Home from "./Home";
 import AddCategory from "./AddCategory";
 import RequireAuth from "./RequireAuth";
 import Login from "./Login";
+import ReusableTable from "./Table";
+import { Menu } from "./Menu";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -18,6 +20,9 @@ root.render(
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/table" element={<ReusableTable />}></Route>
+        <Route path="/menu" element={<Menu />}></Route>
+
         <Route element={<RequireAuth />}>
           <Route path="/addCategory" element={<AddCategory />}></Route>
         </Route>
