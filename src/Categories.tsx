@@ -189,16 +189,22 @@ function Categories() {
                 <td>{cat._id}</td>
                 <td>{cat.name}</td>
                 <td>
-                  <img
-                    height="50px"
-                    src={`http://localhost:8000/${cat.image}`}
-                  />
-                  {cat.image}
+                  <div>
+                    <img
+                      height="50px"
+                      src={`http://localhost:8000/${cat.image}`}
+                    />
+                    <div>{cat.image}</div>
+                  </div>
                 </td>
-                <td style={{ display: "flex", gap: "20px", height: "65px" }}>
-                  <div onClick={handleShow.bind(null, index)}>edit</div>
-                  <div onClick={removeCategory.bind(null, cat._id)}>delete</div>
-                  <div>items</div>
+                <td>
+                  <div style={{ display: "flex", gap: "20px" }}>
+                    <div onClick={handleShow.bind(null, index)}>edit</div>
+                    <div onClick={removeCategory.bind(null, cat._id)}>
+                      delete
+                    </div>
+                    <div>items</div>
+                  </div>
                 </td>
               </tr>
             );

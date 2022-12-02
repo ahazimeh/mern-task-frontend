@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useEffect, useState } from "react";
 import axios from "./api/axios";
+import { useParams } from "react-router-dom";
 
 // const menu = {
 //   categories: [
@@ -61,6 +62,9 @@ function Items() {
   const [image, setImage] = useState<Blob | string>("");
   const [category, setCategory] = useState("");
   const [menu, setMenu] = useState<any>();
+
+  const { categoryId } = useParams();
+  console.log(categoryId);
   useEffect(() => {
     getAllCategories();
   }, []);
@@ -94,11 +98,14 @@ function Items() {
   };
 
   const getAllCategories = async () => {
-    const categories = await axios.get("http://localhost:8000/categories", {
-      params: {
-        username: "john1904",
-      },
-    });
+    const categories = await axios.get(
+      `http://localhost:8000/categories/${categoryId}`,
+      {
+        params: {
+          username: "john1904",
+        },
+      }
+    );
     setMenu(categories.data.menu);
   };
   const uploadImage = async () => {
@@ -178,27 +185,39 @@ function Items() {
           <tr>
             <th>#</th>
             <th>Category</th>
+            <th>name</th>
+            <th>description</th>
+            <th>price</th>
             <th>image</th>
             <th>items</th>
           </tr>
         </thead>
         <tbody>
-          {menu?.map((cat: any, index: any) => {
+          {menu?.items?.map((item: any, index: any) => {
             return (
               <tr>
-                <td>{cat._id}</td>
-                <td>{cat.name}</td>
+                <td>{item._id}</td>
+                <td>{menu.name}</td>
+                <td>{item.name}</td>
+                <td>{item.description}</td>
+                <td>{menu.price}</td>
                 <td>
-                  <img
-                    height="50px"
-                    src={`http://localhost:8000/${cat.image}`}
-                  />
-                  {cat.image}
+                  <div>
+                    <img
+                      height="50px"
+                      src={`http://localhost:8000/${item.image}`}
+                    />
+                    <div>{item.image}</div>
+                  </div>
                 </td>
-                <td style={{ display: "flex", gap: "20px", height: "65px" }}>
-                  <div onClick={handleShow.bind(null, index)}>edit</div>
-                  <div onClick={removeCategory.bind(null, cat._id)}>delete</div>
-                  <div>items</div>
+                <td>
+                  <div style={{ display: "flex", gap: "20px" }}>
+                    <div onClick={handleShow.bind(null, index)}>edit</div>
+                    <div onClick={removeCategory.bind(null, item._id)}>
+                      delete
+                    </div>
+                    <div>items</div>
+                  </div>
                 </td>
               </tr>
             );
