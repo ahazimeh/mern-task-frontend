@@ -189,7 +189,7 @@ function Categories() {
                 <td>{cat._id}</td>
                 <td>{cat.name}</td>
                 <td>
-                  <div>
+                  <div style={{ display: "flex" }}>
                     <img
                       height="50px"
                       src={`http://localhost:8000/${cat.image}`}
