@@ -11,7 +11,29 @@ import { Button } from "react-bootstrap";
 function Login() {
   return (
     <MDBContainer className="p-3 my-5 d-flex flex-column w-50">
-      <MDBInput
+      <div className="form-group">
+        <label htmlFor="exampleInputEmail1">Email address</label>
+        <input
+          type="email"
+          className="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          placeholder="Enter email"
+        />
+        <small id="emailHelp" className="form-text text-muted">
+          We'll never share your email with anyone else.
+        </small>
+      </div>
+      <div className="form-group">
+        <label htmlFor="exampleInputPassword1">Password</label>
+        <input
+          type="password"
+          className="form-control"
+          id="exampleInputPassword1"
+          placeholder="Password"
+        />
+      </div>
+      {/* <MDBInput
         wrapperClass="mb-4"
         label="Email address"
         id="form1"
@@ -22,7 +44,7 @@ function Login() {
         label="Password"
         id="form2"
         type="password"
-      />
+      /> */}
 
       <div className="d-flex justify-content-between mx-3 mb-4">
         <MDBCheckbox
@@ -31,12 +53,12 @@ function Login() {
           id="flexCheckDefault"
           label="Remember me"
         />
-        <a href="!#">Forgot password?</a>
+        {/* <a href="!#">Forgot password?</a> */}
       </div>
       <Button variant="primary">Primary</Button>
       {/* <MDBBtn className="mb-4">Sign in</MDBBtn> */}
 
-      <div className="text-center">
+      {/* <div className="text-center">
         <p>
           Not a member? <a href="#!">Register</a>
         </p>
@@ -82,7 +104,7 @@ function Login() {
             <MDBIcon fab icon="github" size="sm" />
           </MDBBtn>
         </div>
-      </div>
+      </div> */}
     </MDBContainer>
   );
 }
