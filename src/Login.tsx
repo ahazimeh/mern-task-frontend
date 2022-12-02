@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   MDBContainer,
   MDBInput,
@@ -7,8 +7,26 @@ import {
   MDBIcon,
 } from "mdb-react-ui-kit";
 import { Button } from "react-bootstrap";
+import axios from "./api/axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const handleLogin = async () => {
+    const login = await axios({
+      url: "signin",
+      method: "post",
+      data: {
+        email,
+        password,
+      },
+      // data: formData,
+    });
+    localStorage.setItem("token", login.data.token);
+    navigate("/categories");
+  };
   return (
     <MDBContainer className="p-3 my-5 d-flex flex-column w-50">
       <div className="form-group">
@@ -19,6 +37,10 @@ function Login() {
           id="exampleInputEmail1"
           aria-describedby="emailHelp"
           placeholder="Enter email"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
         />
         <small id="emailHelp" className="form-text text-muted">
           We'll never share your email with anyone else.
@@ -31,6 +53,10 @@ function Login() {
           className="form-control"
           id="exampleInputPassword1"
           placeholder="Password"
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
         />
       </div>
       {/* <MDBInput
@@ -55,7 +81,9 @@ function Login() {
         />
         {/* <a href="!#">Forgot password?</a> */}
       </div>
-      <Button variant="primary">Primary</Button>
+      <Button onClick={handleLogin} variant="primary">
+        Login
+      </Button>
       {/* <MDBBtn className="mb-4">Sign in</MDBBtn> */}
 
       {/* <div className="text-center">
