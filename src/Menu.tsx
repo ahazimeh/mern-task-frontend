@@ -82,6 +82,49 @@ export function Menu() {
             );
           })}
         </div>
+
+        {menu.categories.map((cat, index) => {
+          console.log(index);
+          return (
+            <>
+              {!!index && (
+                <h1
+                  id="pasta"
+                  className={`${styles["w3-center"]} ${styles["w3-jumbo"]} ${styles["w3-padding-32"]}`}
+                >
+                  PASTA1
+                </h1>
+              )}
+              <div
+                id="pizza"
+                className={`${styles["w3-container"]} ${styles["w3-white"]} ${styles["w3-padding-32"]}`}
+              >
+                {cat.items.map((item, i) => {
+                  return (
+                    <>
+                      <h1>
+                        <b>Margherita</b>{" "}
+                        <img
+                          height="30px"
+                          src="https://via.placeholder.com/150"
+                        />
+                        <span
+                          className={`${styles["w3-right"]} ${styles["w3-tag"]} ${styles["w3-dark-grey"]} ${styles["w3-round"]}`}
+                        >
+                          $12.50
+                        </span>
+                      </h1>
+                      <p className={`${styles["w3-text-grey"]}`}>
+                        Fresh tomatoes, fresh mozzarella, fresh basil
+                      </p>
+                      <hr />
+                    </>
+                  );
+                })}
+              </div>
+            </>
+          );
+        })}
       </div>
       <div
         id="menu"
