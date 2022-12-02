@@ -57,7 +57,7 @@ import axios from "./api/axios";
 
 function Categories() {
   const [show, setShow] = useState(false);
-  const [itemId, setItemId] = useState(0);
+  const [itemId, setItemId] = useState<number | string>(0);
   const [image, setImage] = useState<Blob | string>("");
   const [category, setCategory] = useState("");
   const [menu, setMenu] = useState<any>();
@@ -74,13 +74,19 @@ function Categories() {
     // uploadImage();
   };
 
+  const removeCategory = async (catId: number) => {
+    await axios({
+      url: `removeCategory/${catId}`,
+      method: "delete",
+    });
+    getAllCategories();
+  };
+
   const handleShow = (index: number) => {
     setImage("");
     if (index !== -1) {
-      setItemId(
-        // +menu?.categories?[index]?.name ||
-        0
-      );
+      setCategory(menu[index]?.name);
+      setItemId(menu[index]?._id || 0);
     }
     // setItemId(id);
     setShow(true);
@@ -93,7 +99,6 @@ function Categories() {
         username: "john1904",
       },
     });
-    console.log(categories);
     setMenu(categories.data.menu);
   };
   const uploadImage = async () => {
@@ -102,7 +107,6 @@ function Categories() {
     }
     // event.preventDefault();
     let formData = new FormData();
-    console.log("a", image);
     if (image) formData.append("image", image, "image");
     if (category) formData.append("name", category);
     setCategory("");
@@ -116,7 +120,7 @@ function Categories() {
       getAllCategories();
       return;
     } else {
-      axios({
+      await axios({
         url: `updateCategory/${itemId}`,
         method: "post",
         data: formData,
@@ -126,9 +130,7 @@ function Categories() {
     }
   };
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("asd");
     const file = e.target.files![0];
-    console.log(file);
     setImage(file || "");
   };
 
@@ -153,6 +155,7 @@ function Categories() {
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="Enter Category"
+              value={category}
               onChange={(e) => setCategory(e.target.value)}
             />
             <small id="emailHelp" className="form-text text-muted">
@@ -181,15 +184,20 @@ function Categories() {
         </thead>
         <tbody>
           {menu?.map((cat: any, index: any) => {
-            console.log("Asdsa");
             return (
               <tr>
-                <td>num</td>
+                <td>{cat._id}</td>
                 <td>{cat.name}</td>
-                <td>{cat.image}</td>
-                <td style={{ display: "flex", gap: "20px" }}>
+                <td>
+                  <img
+                    height="50px"
+                    src={`http://localhost:8000/${cat.image}`}
+                  />
+                  {cat.image}
+                </td>
+                <td style={{ display: "flex", gap: "20px", height: "65px" }}>
                   <div onClick={handleShow.bind(null, index)}>edit</div>
-                  <div>delete</div>
+                  <div onClick={removeCategory.bind(null, cat._id)}>delete</div>
                   <div>items</div>
                 </td>
               </tr>
