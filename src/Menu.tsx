@@ -77,6 +77,7 @@ export function Menu() {
             return (
               <>
                 <a
+                  style={{ cursor: "pointer" }}
                   onClick={() => {
                     executeScroll(index);
                   }}
