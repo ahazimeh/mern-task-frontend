@@ -4,7 +4,6 @@ import Modal from "react-bootstrap/Modal";
 import { useEffect, useState } from "react";
 import axios from "../api/axios";
 import NavBar from "./NavBar";
-import { Link } from "react-router-dom";
 import { Category } from "../types";
 import SingleCategory from "./SingleCategory";
 
@@ -147,31 +146,6 @@ function Categories() {
                 cat={cat}
                 key={cat._id}
               />
-            );
-            return (
-              <tr key={cat._id}>
-                <td>{cat._id}</td>
-                <td>{cat.name}</td>
-                <td>
-                  <div style={{ display: "flex" }}>
-                    <img
-                      height="50px"
-                      src={`http://localhost:8000/${cat.image}`}
-                    />
-                  </div>
-                </td>
-                <td>
-                  <div style={{ display: "flex", gap: "20px" }}>
-                    <div onClick={handleShow.bind(null, index)}>edit</div>
-                    <div onClick={removeCategory.bind(null, cat._id)}>
-                      delete
-                    </div>
-                    <div>
-                      <Link to={`/items/${cat._id}`}>items</Link>
-                    </div>
-                  </div>
-                </td>
-              </tr>
             );
           })}
         </tbody>
