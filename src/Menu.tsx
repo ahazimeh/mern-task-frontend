@@ -1,4 +1,4 @@
-import { createRef, useEffect, useRef, useState } from "react";
+import { createRef, Fragment, useEffect, useRef, useState } from "react";
 import styles from "./Menu.module.css";
 import axios from "./api/axios";
 import { create } from "domain";
@@ -38,7 +38,7 @@ export function Menu() {
         >
           {menu?.map((cat: Category, index: number) => {
             return (
-              <>
+              <Fragment key={cat._id}>
                 <a
                   style={{ cursor: "pointer" }}
                   onClick={() => {
@@ -54,14 +54,14 @@ export function Menu() {
                     <img height="30px" src={cat.image} />
                   </div>
                 </a>
-              </>
+              </Fragment>
             );
           })}
         </div>
 
         {menu.map((cat: Category, index: number) => {
           return (
-            <>
+            <Fragment key={cat._id}>
               {!!index && (
                 <h1
                   id="pasta"
@@ -76,7 +76,7 @@ export function Menu() {
               >
                 {cat.items.map((item: Item) => {
                   return (
-                    <>
+                    <Fragment key={item._id}>
                       <h1>
                         <b>{item.name}</b>{" "}
                         {item.image && <img height="30px" src={item.image} />}
@@ -95,11 +95,11 @@ export function Menu() {
                       )}
 
                       <hr />
-                    </>
+                    </Fragment>
                   );
                 })}
               </div>
-            </>
+            </Fragment>
           );
         })}
       </div>

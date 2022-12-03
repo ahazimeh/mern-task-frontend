@@ -175,7 +175,7 @@ function Items() {
         <tbody>
           {menu?.items?.map((item: Item, index: number) => {
             return (
-              <tr>
+              <tr key={item._id}>
                 <td>{item._id}</td>
                 <td>{menu.name}</td>
                 <td>{item.name}</td>
@@ -189,7 +189,6 @@ function Items() {
                         src={`http://localhost:8000/${item.image}`}
                       />
                     )}
-                    {/* <div>{item.image}</div> */}
                   </div>
                 </td>
                 <td>

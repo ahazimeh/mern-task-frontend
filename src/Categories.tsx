@@ -139,7 +139,7 @@ function Categories() {
         <tbody>
           {menu?.map((cat: Category, index: number) => {
             return (
-              <tr>
+              <tr key={cat._id}>
                 <td>{cat._id}</td>
                 <td>{cat.name}</td>
                 <td>
@@ -148,7 +148,6 @@ function Categories() {
                       height="50px"
                       src={`http://localhost:8000/${cat.image}`}
                     />
-                    {/* <div>{cat.image}</div> */}
                   </div>
                 </td>
                 <td>
@@ -165,24 +164,6 @@ function Categories() {
               </tr>
             );
           })}
-          {/* <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Jacob</td>
-          <td>@fat</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Larry the Bird</td>
-          <td>@twitter</td>
-          <td>@twitter</td>
-        </tr> */}
         </tbody>
       </Table>
     </>
