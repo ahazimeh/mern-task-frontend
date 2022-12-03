@@ -3,6 +3,7 @@ import styles from "./Menu.module.css";
 import axios from "./api/axios";
 import { create } from "domain";
 import { Category, Item } from "./types";
+import MenuCategories from "./MenuCategories";
 export function Menu() {
   const [menu, setMenu] = useState([]);
   let elementsRef = menu.map(() => createRef<any>());
@@ -38,24 +39,32 @@ export function Menu() {
         >
           {menu?.map((cat: Category, index: number) => {
             return (
-              <Fragment key={cat._id}>
-                <a
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    executeScroll(index);
-                  }}
-                >
-                  <div
-                    className={`${styles["w3-third"]} ${
-                      styles["w3-padding-large"]
-                    } ${/*styles["w3-red"]*/ " "}`}
-                  >
-                    {cat.name}
-                    <img height="30px" src={cat.image} />
-                  </div>
-                </a>
-              </Fragment>
+              <MenuCategories
+                index={index}
+                cat={cat}
+                elements={elementsRef}
+                key={cat._id}
+              />
             );
+            //   return (
+            //     <Fragment key={cat._id}>
+            //       <a
+            //         style={{ cursor: "pointer" }}
+            //         onClick={() => {
+            //           executeScroll(index);
+            //         }}
+            //       >
+            //         <div
+            //           className={`${styles["w3-third"]} ${
+            //             styles["w3-padding-large"]
+            //           } ${/*styles["w3-red"]*/ " "}`}
+            //         >
+            //           {cat.name}
+            //           <img height="30px" src={cat.image} />
+            //         </div>
+            //       </a>
+            //     </Fragment>
+            //   );
           })}
         </div>
 
