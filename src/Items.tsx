@@ -108,7 +108,6 @@ function Items() {
   return (
     <>
       <NavBar />
-      {name}
       <Button variant="primary" onClick={handleShow.bind(null, -1)}>
         Add Item
       </Button>
