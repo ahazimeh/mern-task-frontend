@@ -6,57 +6,6 @@ import axios from "./api/axios";
 import { useParams } from "react-router-dom";
 import NavBar from "./NavBar";
 
-// const menu = {
-//   categories: [
-//     {
-//       name: "Platters1",
-//       image: "https://via.placeholder.com/150",
-//       items: [
-//         {
-//           name: "Chicken Platter",
-//           description:
-//             "4 chicken pieces with our special sauce served with bbq dip and wedges",
-//           price: 160000,
-//           image: "https://via.placeholder.com/150",
-//         },
-//       ],
-//     },
-//     {
-//       name: "Platters2",
-//       image: "https://via.placeholder.com/150",
-//       items: [
-//         {
-//           name: "Chicken Platter",
-//           description:
-//             "4 chicken pieces with our special sauce served with bbq dip and wedges",
-//           price: 160000,
-//           image: "https://via.placeholder.com/150",
-//         },
-//       ],
-//     },
-//     {
-//       name: "Platters3",
-//       image: "https://via.placeholder.com/150",
-//       items: [
-//         {
-//           name: "Chicken Platter",
-//           description:
-//             "4 chicken pieces with our special sauce served with bbq dip and wedges",
-//           price: 160000,
-//           image: "https://via.placeholder.com/150",
-//         },
-//         {
-//           name: "Chicken Platter",
-//           description:
-//             "4 chicken pieces with our special sauce served with bbq dip and wedges",
-//           price: 160000,
-//           image: "https://via.placeholder.com/150",
-//         },
-//       ],
-//     },
-//   ],
-// };
-
 function Items() {
   const [show, setShow] = useState(false);
   const [itemId, setItemId] = useState<number | string>(0);
@@ -68,10 +17,24 @@ function Items() {
   const [menu, setMenu] = useState<any>();
 
   const { categoryId } = useParams();
-  console.log(categoryId);
   useEffect(() => {
     getAllCategories();
   }, []);
+
+  interface Item {
+    _id: string;
+    name: string;
+    description: string;
+    price: number;
+    image: string;
+  }
+
+  interface Category {
+    _id: string;
+    name: string;
+    image: string;
+    item: [Item];
+  }
   const handleCloseAndSave = () => {
     setShow(false);
     uploadImage();
@@ -85,7 +48,7 @@ function Items() {
     // uploadImage();
   };
 
-  const removeCategory = async (catId: number) => {
+  const removeCategory = async (catId: string) => {
     await axios({
       url: `removeItem/${categoryId}/${catId}`,
       method: "delete",
@@ -96,7 +59,6 @@ function Items() {
   const handleShow = (index: number) => {
     setImage("");
     if (index !== -1) {
-      console.log("asdasdas", menu);
       setName(menu.items[index]?.name);
       setDescription(menu.items[index]?.description);
       setPrice(menu.items[index]?.price);
@@ -225,7 +187,7 @@ function Items() {
           </tr>
         </thead>
         <tbody>
-          {menu?.items?.map((item: any, index: any) => {
+          {menu?.items?.map((item: Item, index: any) => {
             return (
               <tr>
                 <td>{item._id}</td>
@@ -253,24 +215,6 @@ function Items() {
               </tr>
             );
           })}
-          {/* <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Jacob</td>
-          <td>@fat</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Larry the Bird</td>
-          <td>@twitter</td>
-          <td>@twitter</td>
-        </tr> */}
         </tbody>
       </Table>
     </>

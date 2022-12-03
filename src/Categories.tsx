@@ -6,57 +6,6 @@ import axios from "./api/axios";
 import NavBar from "./NavBar";
 import { Link } from "react-router-dom";
 
-// const menu = {
-//   categories: [
-//     {
-//       name: "Platters1",
-//       image: "https://via.placeholder.com/150",
-//       items: [
-//         {
-//           name: "Chicken Platter",
-//           description:
-//             "4 chicken pieces with our special sauce served with bbq dip and wedges",
-//           price: 160000,
-//           image: "https://via.placeholder.com/150",
-//         },
-//       ],
-//     },
-//     {
-//       name: "Platters2",
-//       image: "https://via.placeholder.com/150",
-//       items: [
-//         {
-//           name: "Chicken Platter",
-//           description:
-//             "4 chicken pieces with our special sauce served with bbq dip and wedges",
-//           price: 160000,
-//           image: "https://via.placeholder.com/150",
-//         },
-//       ],
-//     },
-//     {
-//       name: "Platters3",
-//       image: "https://via.placeholder.com/150",
-//       items: [
-//         {
-//           name: "Chicken Platter",
-//           description:
-//             "4 chicken pieces with our special sauce served with bbq dip and wedges",
-//           price: 160000,
-//           image: "https://via.placeholder.com/150",
-//         },
-//         {
-//           name: "Chicken Platter",
-//           description:
-//             "4 chicken pieces with our special sauce served with bbq dip and wedges",
-//           price: 160000,
-//           image: "https://via.placeholder.com/150",
-//         },
-//       ],
-//     },
-//   ],
-// };
-
 function Categories() {
   const [show, setShow] = useState(false);
   const [itemId, setItemId] = useState<number | string>(0);
@@ -66,6 +15,7 @@ function Categories() {
   useEffect(() => {
     getAllCategories();
   }, []);
+
   const handleCloseAndSave = () => {
     setShow(false);
     uploadImage();
@@ -186,7 +136,7 @@ function Categories() {
           </tr>
         </thead>
         <tbody>
-          {menu?.map((cat: any, index: any) => {
+          {menu?.map((cat, index: number) => {
             return (
               <tr>
                 <td>{cat._id}</td>

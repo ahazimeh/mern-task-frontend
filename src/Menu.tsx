@@ -3,70 +3,14 @@ import styles from "./Menu.module.css";
 import axios from "./api/axios";
 import { create } from "domain";
 export function Menu() {
-  // const menu = {
-  //   categories: [
-  //     {
-  //       name: "Platters1",
-  //       image: "https://via.placeholder.com/150",
-  //       items: [
-  //         {
-  //           name: "Chicken Platter",
-  //           description:
-  //             "4 chicken pieces with our special sauce served with bbq dip and wedges",
-  //           price: 160000,
-  //           image: "https://via.placeholder.com/150",
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       name: "Platters2",
-  //       image: "https://via.placeholder.com/150",
-  //       items: [
-  //         {
-  //           name: "Chicken Platter",
-  //           description:
-  //             "4 chicken pieces with our special sauce served with bbq dip and wedges",
-  //           price: 160000,
-  //           image: "https://via.placeholder.com/150",
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       name: "Platters3",
-  //       image: "https://via.placeholder.com/150",
-  //       items: [
-  //         {
-  //           name: "Chicken Platter",
-  //           description:
-  //             "4 chicken pieces with our special sauce served with bbq dip and wedges",
-  //           price: 160000,
-  //           image: "https://via.placeholder.com/150",
-  //         },
-  //         {
-  //           name: "Chicken Platter",
-  //           description:
-  //             "4 chicken pieces with our special sauce served with bbq dip and wedges",
-  //           price: 160000,
-  //           image: "https://via.placeholder.com/150",
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // };
-
   const [menu, setMenu] = useState([]);
-  // const elementsRef = useRef(menu.map(() => createRef<HTMLDivElement>()));
   let elementsRef = menu.map(() => createRef<any>());
-  // console.log(elementsRef1);
 
   useEffect(() => {
     getAllCategories();
   }, []);
   const executeScroll = (i: number) => {
-    console.log(elementsRef);
-
     elementsRef[i]?.current?.scrollIntoView({ behavior: "smooth" });
-    // elementsRef?.current[i].current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const getAllCategories = async () => {
