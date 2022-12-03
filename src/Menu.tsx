@@ -2,6 +2,7 @@ import { createRef, useEffect, useRef, useState } from "react";
 import styles from "./Menu.module.css";
 import axios from "./api/axios";
 import { create } from "domain";
+import { Category, Item } from "./types";
 export function Menu() {
   const [menu, setMenu] = useState([]);
   let elementsRef = menu.map(() => createRef<any>());
@@ -35,7 +36,7 @@ export function Menu() {
         <div
           className={`${styles["w3-row"]} ${styles["w3-center"]} ${styles["w3-border"]} ${styles["w3-border-dark-grey"]}`}
         >
-          {menu?.map((cat: any, index: any) => {
+          {menu?.map((cat: Category, index: number) => {
             return (
               <>
                 <a
@@ -58,7 +59,7 @@ export function Menu() {
           })}
         </div>
 
-        {menu.map((cat: any, index: any) => {
+        {menu.map((cat: Category, index: number) => {
           return (
             <>
               {!!index && (
@@ -73,7 +74,7 @@ export function Menu() {
                 ref={elementsRef[index]}
                 className={`${styles["w3-container"]} ${styles["w3-white"]} ${styles["w3-padding-32"]}`}
               >
-                {cat.items.map((item: any, i: any) => {
+                {cat.items.map((item: Item) => {
                   return (
                     <>
                       <h1>

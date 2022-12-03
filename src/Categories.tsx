@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "./api/axios";
 import NavBar from "./NavBar";
 import { Link } from "react-router-dom";
+import { Category } from "./types";
 
 function Categories() {
   const [show, setShow] = useState(false);
@@ -27,7 +28,7 @@ function Categories() {
     setCategory("");
   };
 
-  const removeCategory = async (catId: number) => {
+  const removeCategory = async (catId: string) => {
     await axios({
       url: `removeCategory/${catId}`,
       method: "delete",
@@ -136,7 +137,7 @@ function Categories() {
           </tr>
         </thead>
         <tbody>
-          {menu?.map((cat, index: number) => {
+          {menu?.map((cat: Category, index: number) => {
             return (
               <tr>
                 <td>{cat._id}</td>

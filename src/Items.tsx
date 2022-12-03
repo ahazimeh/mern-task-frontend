@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "./api/axios";
 import { useParams } from "react-router-dom";
 import NavBar from "./NavBar";
+import { Item } from "./types";
 
 function Items() {
   const [show, setShow] = useState(false);
@@ -21,20 +22,6 @@ function Items() {
     getAllCategories();
   }, []);
 
-  interface Item {
-    _id: string;
-    name: string;
-    description: string;
-    price: number;
-    image: string;
-  }
-
-  interface Category {
-    _id: string;
-    name: string;
-    image: string;
-    item: [Item];
-  }
   const handleCloseAndSave = () => {
     setShow(false);
     uploadImage();
@@ -187,7 +174,7 @@ function Items() {
           </tr>
         </thead>
         <tbody>
-          {menu?.items?.map((item: Item, index: any) => {
+          {menu?.items?.map((item: Item, index: number) => {
             return (
               <tr>
                 <td>{item._id}</td>
