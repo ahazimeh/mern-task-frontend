@@ -5,10 +5,8 @@ import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Home";
-import AddCategory from "./AddCategory";
 import RequireAuth from "./RequireAuth";
 import Login from "./Login";
-import ReusableTable from "./Table";
 import { Menu } from "./Menu";
 import Categories from "./Categories";
 import Items from "./Items";
@@ -22,14 +20,11 @@ root.render(
       <Routes>
         {/* <Route path="/" element={<Home />}></Route> */}
         <Route path="/login" element={<Login />}></Route>
-        {/* <Route path="/table" element={<ReusableTable />}></Route> */}
         <Route path="/categories" element={<Categories />}></Route>
         <Route path="/items/:categoryId" element={<Items />}></Route>
         <Route path="/" element={<Menu />}></Route>
 
-        <Route element={<RequireAuth />}>
-          {/* <Route path="/addCategory" element={<AddCategory />}></Route> */}
-        </Route>
+        <Route element={<RequireAuth />}></Route>
       </Routes>
       {/* <App /> */}
     </BrowserRouter>
