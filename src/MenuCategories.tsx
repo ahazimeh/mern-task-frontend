@@ -24,7 +24,7 @@ const MenuCategories: React.FC<CategoryProps> = ({ cat, elements, index }) => {
           }`}
         >
           {cat.name}
-          <img height="30px" src={cat.image} />
+          <img height="30px" src={`http://localhost:8000/${cat.image}`} />
         </div>
       </a>
     </Fragment>

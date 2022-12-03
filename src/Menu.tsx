@@ -4,6 +4,7 @@ import axios from "./api/axios";
 import { create } from "domain";
 import { Category, Item } from "./types";
 import MenuCategories from "./MenuCategories";
+import MenuItems from "./MenuItems";
 export function Menu() {
   const [menu, setMenu] = useState([]);
   let elementsRef = menu.map(() => createRef<any>());
@@ -70,46 +71,54 @@ export function Menu() {
 
         {menu.map((cat: Category, index: number) => {
           return (
-            <Fragment key={cat._id}>
-              {!!index && (
-                <h1
-                  id="pasta"
-                  className={`${styles["w3-center"]} ${styles["w3-jumbo"]} ${styles["w3-padding-32"]}`}
-                >
-                  {cat.name}
-                </h1>
-              )}
-              <div
-                ref={elementsRef[index]}
-                className={`${styles["w3-container"]} ${styles["w3-white"]} ${styles["w3-padding-32"]}`}
-              >
-                {cat.items.map((item: Item) => {
-                  return (
-                    <Fragment key={item._id}>
-                      <h1>
-                        <b>{item.name}</b>{" "}
-                        {item.image && <img height="30px" src={item.image} />}
-                        {!!item.price && (
-                          <span
-                            className={`${styles["w3-right"]} ${styles["w3-tag"]} ${styles["w3-dark-grey"]} ${styles["w3-round"]}`}
-                          >
-                            {item.price}
-                          </span>
-                        )}
-                      </h1>
-                      {item.description && (
-                        <p className={`${styles["w3-text-grey"]}`}>
-                          {item.description}
-                        </p>
-                      )}
-
-                      <hr />
-                    </Fragment>
-                  );
-                })}
-              </div>
-            </Fragment>
+            <MenuItems
+              index={index}
+              cat={cat}
+              elements={elementsRef}
+              key={cat._id}
+            />
           );
+          // return (
+          //   <Fragment key={cat._id}>
+          //     {!!index && (
+          //       <h1
+          //         id="pasta"
+          //         className={`${styles["w3-center"]} ${styles["w3-jumbo"]} ${styles["w3-padding-32"]}`}
+          //       >
+          //         {cat.name}
+          //       </h1>
+          //     )}
+          //     <div
+          //       ref={elementsRef[index]}
+          //       className={`${styles["w3-container"]} ${styles["w3-white"]} ${styles["w3-padding-32"]}`}
+          //     >
+          //       {cat.items.map((item: Item) => {
+          //         return (
+          //           <Fragment key={item._id}>
+          //             <h1>
+          //               <b>{item.name}</b>{" "}
+          //               {item.image && <img height="30px" src={item.image} />}
+          //               {!!item.price && (
+          //                 <span
+          //                   className={`${styles["w3-right"]} ${styles["w3-tag"]} ${styles["w3-dark-grey"]} ${styles["w3-round"]}`}
+          //                 >
+          //                   {item.price}
+          //                 </span>
+          //               )}
+          //             </h1>
+          //             {item.description && (
+          //               <p className={`${styles["w3-text-grey"]}`}>
+          //                 {item.description}
+          //               </p>
+          //             )}
+
+          //             <hr />
+          //           </Fragment>
+          //         );
+          //       })}
+          //     </div>
+          //   </Fragment>
+          // );
         })}
       </div>
     </div>

@@ -174,13 +174,14 @@ function Items() {
         </thead>
         <tbody>
           {menu?.items?.map((item: Item, index: number) => {
+            console.log(item);
             return (
               <tr key={item._id}>
                 <td>{item._id}</td>
                 <td>{menu.name}</td>
                 <td>{item.name}</td>
                 <td>{item.description}</td>
-                <td>{menu.price}</td>
+                <td>{item.price}</td>
                 <td>
                   <div style={{ display: "flex" }}>
                     {item.image && (
