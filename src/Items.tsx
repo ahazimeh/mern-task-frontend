@@ -183,10 +183,12 @@ function Items() {
                 <td>{menu.price}</td>
                 <td>
                   <div style={{ display: "flex" }}>
-                    <img
-                      height="50px"
-                      src={`http://localhost:8000/${item.image}`}
-                    />
+                    {item.image && (
+                      <img
+                        height="50px"
+                        src={`http://localhost:8000/${item.image}`}
+                      />
+                    )}
                     <div>{item.image}</div>
                   </div>
                 </td>
