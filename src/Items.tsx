@@ -124,14 +124,17 @@ function Items() {
     // event.preventDefault();
     let formData = new FormData();
     if (image) formData.append("image", image, "image");
-    if (name) formData.append("name", name);
-    if (description) formData.append("description", description);
-    if (price) formData.append("price", price);
+    if (name) formData.append("itemName", name);
+    if (description) formData.append("itemDescription", description);
+    if (price) formData.append("itemPrice", price);
+    else formData.append("itemPrice", "0");
     setName("");
     setImage("");
+    setDescription("");
+    setPrice("");
     if (!itemId) {
       await axios({
-        url: "addCategory",
+        url: `addItem/${categoryId}`,
         method: "post",
         data: formData,
       });
@@ -139,7 +142,7 @@ function Items() {
       return;
     } else {
       await axios({
-        url: `updateCategory/${itemId}`,
+        url: `updateItem/${categoryId}/${itemId}`,
         method: "post",
         data: formData,
       });
@@ -156,7 +159,7 @@ function Items() {
     <>
       {name}
       <Button variant="primary" onClick={handleShow.bind(null, -1)}>
-        Launch demo modal
+        Add Item
       </Button>
 
       <Modal show={show} onHide={handleClose}>
@@ -172,7 +175,7 @@ function Items() {
               className="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
-              placeholder="Enter Category"
+              placeholder="Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -181,7 +184,7 @@ function Items() {
               className="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
-              placeholder="Enter Category"
+              placeholder="Price"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
@@ -191,7 +194,7 @@ function Items() {
               className="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
-              placeholder="Enter Category"
+              placeholder="Description"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             />

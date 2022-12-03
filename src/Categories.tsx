@@ -139,7 +139,7 @@ function Categories() {
     <>
       {category}
       <Button variant="primary" onClick={handleShow.bind(null, -1)}>
-        Launch demo modal
+        Add Category
       </Button>
 
       <Modal show={show} onHide={handleClose}>
