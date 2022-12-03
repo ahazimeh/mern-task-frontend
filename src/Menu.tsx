@@ -1,62 +1,75 @@
-import { createRef, useRef } from "react";
+import { createRef, useEffect, useRef, useState } from "react";
 import styles from "./Menu.module.css";
+import axios from "./api/axios";
 export function Menu() {
-  const menu = {
-    categories: [
-      {
-        name: "Platters1",
-        image: "https://via.placeholder.com/150",
-        items: [
-          {
-            name: "Chicken Platter",
-            description:
-              "4 chicken pieces with our special sauce served with bbq dip and wedges",
-            price: 160000,
-            image: "https://via.placeholder.com/150",
-          },
-        ],
-      },
-      {
-        name: "Platters2",
-        image: "https://via.placeholder.com/150",
-        items: [
-          {
-            name: "Chicken Platter",
-            description:
-              "4 chicken pieces with our special sauce served with bbq dip and wedges",
-            price: 160000,
-            image: "https://via.placeholder.com/150",
-          },
-        ],
-      },
-      {
-        name: "Platters3",
-        image: "https://via.placeholder.com/150",
-        items: [
-          {
-            name: "Chicken Platter",
-            description:
-              "4 chicken pieces with our special sauce served with bbq dip and wedges",
-            price: 160000,
-            image: "https://via.placeholder.com/150",
-          },
-          {
-            name: "Chicken Platter",
-            description:
-              "4 chicken pieces with our special sauce served with bbq dip and wedges",
-            price: 160000,
-            image: "https://via.placeholder.com/150",
-          },
-        ],
-      },
-    ],
-  };
+  // const menu = {
+  //   categories: [
+  //     {
+  //       name: "Platters1",
+  //       image: "https://via.placeholder.com/150",
+  //       items: [
+  //         {
+  //           name: "Chicken Platter",
+  //           description:
+  //             "4 chicken pieces with our special sauce served with bbq dip and wedges",
+  //           price: 160000,
+  //           image: "https://via.placeholder.com/150",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       name: "Platters2",
+  //       image: "https://via.placeholder.com/150",
+  //       items: [
+  //         {
+  //           name: "Chicken Platter",
+  //           description:
+  //             "4 chicken pieces with our special sauce served with bbq dip and wedges",
+  //           price: 160000,
+  //           image: "https://via.placeholder.com/150",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       name: "Platters3",
+  //       image: "https://via.placeholder.com/150",
+  //       items: [
+  //         {
+  //           name: "Chicken Platter",
+  //           description:
+  //             "4 chicken pieces with our special sauce served with bbq dip and wedges",
+  //           price: 160000,
+  //           image: "https://via.placeholder.com/150",
+  //         },
+  //         {
+  //           name: "Chicken Platter",
+  //           description:
+  //             "4 chicken pieces with our special sauce served with bbq dip and wedges",
+  //           price: 160000,
+  //           image: "https://via.placeholder.com/150",
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // };
 
-  const elementsRef = useRef(
-    menu.categories.map(() => createRef<HTMLDivElement>())
-  );
+  const [menu, setMenu] = useState([]);
+  const elementsRef = useRef(menu.map(() => createRef<HTMLDivElement>()));
+
+  useEffect(() => {
+    getAllCategories();
+  }, []);
   const executeScroll = (i: number) => {
     elementsRef?.current[i].current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const getAllCategories = async () => {
+    const categories = await axios.get("http://localhost:8000/categories", {
+      params: {
+        username: "john1904",
+      },
+    });
+    setMenu(categories.data.menu);
   };
   return (
     <div>
@@ -72,8 +85,7 @@ export function Menu() {
         <div
           className={`${styles["w3-row"]} ${styles["w3-center"]} ${styles["w3-border"]} ${styles["w3-border-dark-grey"]}`}
         >
-          {menu.categories.map((cat, index) => {
-            console.log(cat);
+          {menu?.map((cat: any, index: any) => {
             return (
               <>
                 <a
@@ -96,8 +108,7 @@ export function Menu() {
           })}
         </div>
 
-        {menu.categories.map((cat, index) => {
-          console.log(index);
+        {menu.map((cat: any, index: any) => {
           return (
             <>
               {!!index && (
@@ -112,7 +123,7 @@ export function Menu() {
                 ref={elementsRef.current[index]}
                 className={`${styles["w3-container"]} ${styles["w3-white"]} ${styles["w3-padding-32"]}`}
               >
-                {cat.items.map((item, i) => {
+                {cat.items.map((item: any, i: any) => {
                   return (
                     <>
                       <h1>
