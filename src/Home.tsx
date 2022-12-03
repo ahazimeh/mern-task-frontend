@@ -2,7 +2,7 @@ import React, { createRef, useEffect, useRef } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import axios from "./api/axios";
-import NavBar from "./NavBar";
+import NavBar from "./components/NavBar";
 
 function Home() {
   const menu = {

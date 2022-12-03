@@ -6,10 +6,10 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Home";
 import RequireAuth from "./RequireAuth";
-import Login from "./Login";
-import { Menu } from "./Menu";
-import Categories from "./Categories";
-import Items from "./Items";
+import Items from "./components/Items";
+import Login from "./components/Login";
+import Categories from "./components/Categories";
+import { Menu } from "./components/Menu";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

@@ -2,10 +2,10 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useEffect, useState } from "react";
-import axios from "./api/axios";
+import axios from "../api/axios";
 import { useParams } from "react-router-dom";
 import NavBar from "./NavBar";
-import { Item } from "./types";
+import { Item } from "../types";
 
 function Items() {
   const [show, setShow] = useState(false);

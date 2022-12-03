@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { Category } from "./types";
+import { Category } from "../types";
 import styles from "./Menu.module.css";
 type CategoryProps = {
   cat: Category;

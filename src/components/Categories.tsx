@@ -2,10 +2,10 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useEffect, useState } from "react";
-import axios from "./api/axios";
+import axios from "../api/axios";
 import NavBar from "./NavBar";
 import { Link } from "react-router-dom";
-import { Category } from "./types";
+import { Category } from "../types";
 
 function Categories() {
   const [show, setShow] = useState(false);

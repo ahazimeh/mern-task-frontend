@@ -1,8 +1,8 @@
 import { createRef, Fragment, useEffect, useRef, useState } from "react";
 import styles from "./Menu.module.css";
-import axios from "./api/axios";
+import axios from "../api/axios";
 import { create } from "domain";
-import { Category, Item } from "./types";
+import { Category, Item } from "../types";
 import MenuCategories from "./MenuCategories";
 import MenuItems from "./MenuItems";
 export function Menu() {

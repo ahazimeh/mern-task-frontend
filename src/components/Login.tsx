@@ -7,7 +7,7 @@ import {
   MDBIcon,
 } from "mdb-react-ui-kit";
 import { Button } from "react-bootstrap";
-import axios from "./api/axios";
+import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
 import NavBar from "./NavBar";
 
