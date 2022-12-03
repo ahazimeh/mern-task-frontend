@@ -4,6 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import { useEffect, useState } from "react";
 import axios from "./api/axios";
 import { useParams } from "react-router-dom";
+import NavBar from "./NavBar";
 
 // const menu = {
 //   categories: [
@@ -157,6 +158,7 @@ function Items() {
 
   return (
     <>
+      <NavBar />
       {name}
       <Button variant="primary" onClick={handleShow.bind(null, -1)}>
         Add Item

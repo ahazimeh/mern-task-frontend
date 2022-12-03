@@ -9,6 +9,7 @@ import {
 import { Button } from "react-bootstrap";
 import axios from "./api/axios";
 import { useNavigate } from "react-router-dom";
+import NavBar from "./NavBar";
 
 function Login() {
   const navigate = useNavigate();
@@ -28,38 +29,40 @@ function Login() {
     navigate("/categories");
   };
   return (
-    <MDBContainer className="p-3 my-5 d-flex flex-column w-50">
-      <div className="form-group">
-        <label htmlFor="exampleInputEmail1">Email address</label>
-        <input
-          type="email"
-          className="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-          placeholder="Enter email"
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
-        <small id="emailHelp" className="form-text text-muted">
-          We'll never share your email with anyone else.
-        </small>
-      </div>
-      <div className="form-group">
-        <label htmlFor="exampleInputPassword1">Password</label>
-        <input
-          type="password"
-          className="form-control"
-          id="exampleInputPassword1"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
-      </div>
-      {/* <MDBInput
+    <>
+      <NavBar />
+      <MDBContainer className="p-3 my-5 d-flex flex-column w-50">
+        <div className="form-group">
+          <label htmlFor="exampleInputEmail1">Email address</label>
+          <input
+            type="email"
+            className="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            placeholder="Enter email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+          <small id="emailHelp" className="form-text text-muted">
+            We'll never share your email with anyone else.
+          </small>
+        </div>
+        <div className="form-group">
+          <label htmlFor="exampleInputPassword1">Password</label>
+          <input
+            type="password"
+            className="form-control"
+            id="exampleInputPassword1"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+        </div>
+        {/* <MDBInput
         wrapperClass="mb-4"
         label="Email address"
         id="form1"
@@ -72,21 +75,21 @@ function Login() {
         type="password"
       /> */}
 
-      <div className="d-flex justify-content-between mx-3 mb-4">
-        <MDBCheckbox
-          name="flexCheck"
-          value=""
-          id="flexCheckDefault"
-          label="Remember me"
-        />
-        {/* <a href="!#">Forgot password?</a> */}
-      </div>
-      <Button onClick={handleLogin} variant="primary">
-        Login
-      </Button>
-      {/* <MDBBtn className="mb-4">Sign in</MDBBtn> */}
+        <div className="d-flex justify-content-between mx-3 mb-4">
+          <MDBCheckbox
+            name="flexCheck"
+            value=""
+            id="flexCheckDefault"
+            label="Remember me"
+          />
+          {/* <a href="!#">Forgot password?</a> */}
+        </div>
+        <Button onClick={handleLogin} variant="primary">
+          Login
+        </Button>
+        {/* <MDBBtn className="mb-4">Sign in</MDBBtn> */}
 
-      {/* <div className="text-center">
+        {/* <div className="text-center">
         <p>
           Not a member? <a href="#!">Register</a>
         </p>
@@ -133,7 +136,8 @@ function Login() {
           </MDBBtn>
         </div>
       </div> */}
-    </MDBContainer>
+      </MDBContainer>
+    </>
   );
 }
 export default Login;

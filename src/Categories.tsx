@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useEffect, useState } from "react";
 import axios from "./api/axios";
+import NavBar from "./NavBar";
 
 // const menu = {
 //   categories: [
@@ -137,7 +138,7 @@ function Categories() {
 
   return (
     <>
-      {category}
+      <NavBar />
       <Button variant="primary" onClick={handleShow.bind(null, -1)}>
         Add Category
       </Button>
