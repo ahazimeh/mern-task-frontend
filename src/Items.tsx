@@ -189,7 +189,7 @@ function Items() {
                         src={`http://localhost:8000/${item.image}`}
                       />
                     )}
-                    <div>{item.image}</div>
+                    {/* <div>{item.image}</div> */}
                   </div>
                 </td>
                 <td>

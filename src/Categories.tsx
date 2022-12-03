@@ -148,7 +148,7 @@ function Categories() {
                       height="50px"
                       src={`http://localhost:8000/${cat.image}`}
                     />
-                    <div>{cat.image}</div>
+                    {/* <div>{cat.image}</div> */}
                   </div>
                 </td>
                 <td>
