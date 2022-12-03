@@ -86,7 +86,7 @@ function Items() {
 
   const removeCategory = async (catId: number) => {
     await axios({
-      url: `removeCategory/${catId}`,
+      url: `removeItem/${categoryId}/${catId}`,
       method: "delete",
     });
     getAllCategories();
