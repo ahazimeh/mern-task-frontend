@@ -1,6 +1,7 @@
 import { createRef, useEffect, useRef, useState } from "react";
 import styles from "./Menu.module.css";
 import axios from "./api/axios";
+import { create } from "domain";
 export function Menu() {
   // const menu = {
   //   categories: [
@@ -54,13 +55,18 @@ export function Menu() {
   // };
 
   const [menu, setMenu] = useState([]);
-  const elementsRef = useRef(menu.map(() => createRef<HTMLDivElement>()));
+  // const elementsRef = useRef(menu.map(() => createRef<HTMLDivElement>()));
+  let elementsRef = menu.map(() => createRef<any>());
+  // console.log(elementsRef1);
 
   useEffect(() => {
     getAllCategories();
   }, []);
   const executeScroll = (i: number) => {
-    elementsRef?.current[i].current?.scrollIntoView({ behavior: "smooth" });
+    console.log(elementsRef);
+
+    elementsRef[i]?.current?.scrollIntoView({ behavior: "smooth" });
+    // elementsRef?.current[i].current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const getAllCategories = async () => {
@@ -120,7 +126,7 @@ export function Menu() {
                 </h1>
               )}
               <div
-                ref={elementsRef.current[index]}
+                ref={elementsRef[index]}
                 className={`${styles["w3-container"]} ${styles["w3-white"]} ${styles["w3-padding-32"]}`}
               >
                 {cat.items.map((item: any, i: any) => {
