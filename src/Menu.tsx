@@ -80,7 +80,7 @@ export function Menu() {
                       <h1>
                         <b>{item.name}</b>{" "}
                         {item.image && <img height="30px" src={item.image} />}
-                        {item.price && (
+                        {!!item.price && (
                           <span
                             className={`${styles["w3-right"]} ${styles["w3-tag"]} ${styles["w3-dark-grey"]} ${styles["w3-round"]}`}
                           >
