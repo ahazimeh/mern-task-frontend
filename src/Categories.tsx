@@ -72,6 +72,7 @@ function Categories() {
   const handleClose = () => {
     setShow(false);
     // uploadImage();
+    setCategory("");
   };
 
   const removeCategory = async (catId: number) => {

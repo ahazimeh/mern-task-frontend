@@ -78,6 +78,9 @@ function Items() {
 
   const handleClose = () => {
     setShow(false);
+    setName("");
+    setDescription("");
+    setPrice("");
     // uploadImage();
   };
 
