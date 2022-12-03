@@ -6,6 +6,7 @@ import axios from "../api/axios";
 import NavBar from "./NavBar";
 import { Link } from "react-router-dom";
 import { Category } from "../types";
+import SingleCategory from "./SingleCategory";
 
 function Categories() {
   const [show, setShow] = useState(false);
@@ -138,6 +139,15 @@ function Categories() {
         </thead>
         <tbody>
           {menu?.map((cat: Category, index: number) => {
+            return (
+              <SingleCategory
+                handleShow={handleShow}
+                removeCategory={removeCategory}
+                index={index}
+                cat={cat}
+                key={cat._id}
+              />
+            );
             return (
               <tr key={cat._id}>
                 <td>{cat._id}</td>
