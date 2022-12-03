@@ -248,7 +248,6 @@ function Items() {
                     <div onClick={removeCategory.bind(null, item._id)}>
                       delete
                     </div>
-                    <div>items</div>
                   </div>
                 </td>
               </tr>

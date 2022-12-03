@@ -4,6 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import { useEffect, useState } from "react";
 import axios from "./api/axios";
 import NavBar from "./NavBar";
+import { Link } from "react-router-dom";
 
 // const menu = {
 //   categories: [
@@ -205,7 +206,9 @@ function Categories() {
                     <div onClick={removeCategory.bind(null, cat._id)}>
                       delete
                     </div>
-                    <div>items</div>
+                    <div>
+                      <Link to={`/items/${cat._id}`}>items</Link>
+                    </div>
                   </div>
                 </td>
               </tr>
