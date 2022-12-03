@@ -22,13 +22,13 @@ root.render(
       <Routes>
         {/* <Route path="/" element={<Home />}></Route> */}
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/table" element={<ReusableTable />}></Route>
+        {/* <Route path="/table" element={<ReusableTable />}></Route> */}
         <Route path="/categories" element={<Categories />}></Route>
         <Route path="/items/:categoryId" element={<Items />}></Route>
         <Route path="/" element={<Menu />}></Route>
 
         <Route element={<RequireAuth />}>
-          <Route path="/addCategory" element={<AddCategory />}></Route>
+          {/* <Route path="/addCategory" element={<AddCategory />}></Route> */}
         </Route>
       </Routes>
       {/* <App /> */}
