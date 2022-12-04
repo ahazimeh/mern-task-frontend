@@ -181,10 +181,15 @@ function Items() {
           </tr>
         </thead>
         <DragDropContext
-          onDragEnd={(param) => {
+          onDragEnd={async (param) => {
             const srcI = param.source.index;
-            const desI = param.destination?.index || -1;
+            const desI = param.destination?.index ?? -1;
             if (desI === -1) return;
+            await axios({
+              url: `orderItems/${menu._id}/${menu.items[srcI]._id}/${menu.items[desI]._id}`,
+              method: "post",
+            });
+            getAllCategories();
           }}
         >
           <Droppable droppableId="droppable-1">
