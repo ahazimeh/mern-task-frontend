@@ -1,7 +1,7 @@
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "../api/axios";
 import { useParams } from "react-router-dom";
 import NavBar from "./NavBar";
@@ -40,7 +40,6 @@ function Items() {
     setName("");
     setDescription("");
     setPrice("");
-    // uploadImage();
   };
 
   const removeCategory = async (catId: string) => {
@@ -59,9 +58,7 @@ function Items() {
       setPrice(menu.items[index]?.price);
       setItemId(menu.items[index]?._id || 0);
     }
-    // setItemId(id);
     setShow(true);
-    // uploadImage();
   };
 
   const getAllCategories = async () => {
@@ -184,13 +181,6 @@ function Items() {
           onDragEnd={async (param) => {
             let srcI = param.source.index;
             let desI = param.destination?.index ?? -1;
-
-            // so always src is smaller than des
-            // if (desI < srcI) {
-            //   let z = desI;
-            //   srcI = desI;
-            //   desI = z;
-            // }
             if (desI === -1 || srcI === desI) return;
             let sourceId = menu.items[srcI]._id;
             let destId = menu.items[desI]._id;
@@ -199,7 +189,7 @@ function Items() {
               url: `orderItems/${menu._id}/${sourceId}/${destId}`,
               method: "post",
             });
-            // getAllCategories();
+            getAllCategories();
           }}
         >
           <Droppable droppableId="droppable-1">

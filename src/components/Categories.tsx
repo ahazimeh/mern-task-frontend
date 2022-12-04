@@ -31,7 +31,6 @@ function Categories() {
 
   const handleClose = () => {
     setShow(false);
-    // uploadImage();
     setCategory("");
   };
 
@@ -49,9 +48,7 @@ function Categories() {
       setCategory(menu[index]?.name);
       setItemId(menu[index]?._id || 0);
     }
-    // setItemId(id);
     setShow(true);
-    // uploadImage();
   };
 
   const getAllCategories = async () => {
@@ -66,7 +63,6 @@ function Categories() {
     if (!category || (!image && !itemId)) {
       return;
     }
-    // event.preventDefault();
     let formData = new FormData();
     if (image) formData.append("image", image, "image");
     if (category) formData.append("name", category);
@@ -145,16 +141,8 @@ function Categories() {
         </thead>
         <DragDropContext
           onDragEnd={async (param) => {
-            console.log("aa");
             let srcI = param.source.index;
             let desI = param.destination?.index ?? -1;
-            console.log(param);
-            // so always src is smaller than des
-            // if (desI < srcI) {
-            //   let z = desI;
-            //   srcI = desI;
-            //   desI = z;
-            // }
             if (desI === -1 || srcI === desI) return;
             let sourceId = menu[srcI]._id;
             let destId = menu[desI]._id;
