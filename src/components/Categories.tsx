@@ -71,7 +71,7 @@ function Categories() {
     if (!itemId) {
       await axios({
         url: "addCategory",
-        method: "post",
+        method: "put",
         data: formData,
       });
       getAllCategories();
@@ -79,7 +79,7 @@ function Categories() {
     } else {
       await axios({
         url: `updateCategory/${itemId}`,
-        method: "post",
+        method: "put",
         data: formData,
       });
       getAllCategories();

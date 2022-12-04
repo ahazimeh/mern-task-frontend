@@ -96,8 +96,8 @@ function Items() {
       return;
     } else {
       await axios({
-        url: `updateItem/${categoryId}/${itemId}`,
-        method: "post",
+        url: `updateItem/${categoryId}/${itemId}?_method=PUT`,
+        method: "put",
         data: formData,
       });
       getAllCategories();

@@ -8,10 +8,13 @@ axios.defaults.baseURL = BASE_URL;
 
 const instance = axios.create({
   baseURL: BASE_URL,
+  headers: {
+    Authorization: localStorage.getItem("token"),
+  },
 });
 
 instance.interceptors.request.use((config: any) => {
-  config.headers.Authorization = `Bearer ${Cookies.get("token")}`;
+  // config.headers.Authorization = `Bearer ${Cookies.get("token")}`;
   return config;
 });
 
