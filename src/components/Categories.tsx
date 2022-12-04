@@ -149,7 +149,7 @@ function Categories() {
             const srcI = param.source.index;
             const desI = param.destination?.index ?? -1;
             console.log(param);
-            if (desI === -1) return;
+            if (desI === -1 || srcI === desI) return;
             await axios({
               url: `orderCategories/${menu[srcI]._id}/${menu[desI]._id}`,
               method: "post",
