@@ -182,8 +182,15 @@ function Items() {
         </thead>
         <DragDropContext
           onDragEnd={async (param) => {
-            const srcI = param.source.index;
-            const desI = param.destination?.index ?? -1;
+            let srcI = param.source.index;
+            let desI = param.destination?.index ?? -1;
+
+            // so always src is smaller than des
+            // if (desI < srcI) {
+            //   let z = desI;
+            //   srcI = desI;
+            //   desI = z;
+            // }
             if (desI === -1 || srcI === desI) return;
             await axios({
               url: `orderItems/${menu._id}/${menu.items[srcI]._id}/${menu.items[desI]._id}`,

@@ -146,9 +146,15 @@ function Categories() {
         <DragDropContext
           onDragEnd={async (param) => {
             console.log("aa");
-            const srcI = param.source.index;
-            const desI = param.destination?.index ?? -1;
+            let srcI = param.source.index;
+            let desI = param.destination?.index ?? -1;
             console.log(param);
+            // so always src is smaller than des
+            // if (desI < srcI) {
+            //   let z = desI;
+            //   srcI = desI;
+            //   desI = z;
+            // }
             if (desI === -1 || srcI === desI) return;
             await axios({
               url: `orderCategories/${menu[srcI]._id}/${menu[desI]._id}`,
