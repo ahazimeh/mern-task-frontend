@@ -61,15 +61,7 @@ function Login() {
             }}
           />
         </div>
-
-        <div className="d-flex justify-content-between mx-3 mb-4">
-          <MDBCheckbox
-            name="flexCheck"
-            value=""
-            id="flexCheckDefault"
-            label="Remember me"
-          />
-        </div>
+        <br />
         <Button onClick={handleLogin} variant="primary">
           Login
         </Button>
