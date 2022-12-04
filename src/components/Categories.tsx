@@ -156,8 +156,11 @@ function Categories() {
             //   desI = z;
             // }
             if (desI === -1 || srcI === desI) return;
+            let sourceId = menu[srcI]._id;
+            let destId = menu[desI]._id;
+            menu.splice(desI, 0, menu.splice(srcI, 1)[0]);
             await axios({
-              url: `orderCategories/${menu[srcI]._id}/${menu[desI]._id}`,
+              url: `orderCategories/${sourceId}/${destId}`,
               method: "post",
             });
             getAllCategories();

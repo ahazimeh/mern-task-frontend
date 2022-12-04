@@ -192,11 +192,14 @@ function Items() {
             //   desI = z;
             // }
             if (desI === -1 || srcI === desI) return;
+            let sourceId = menu.items[srcI]._id;
+            let destId = menu.items[desI]._id;
+            menu.items.splice(desI, 0, menu.items.splice(srcI, 1)[0]);
             await axios({
-              url: `orderItems/${menu._id}/${menu.items[srcI]._id}/${menu.items[desI]._id}`,
+              url: `orderItems/${menu._id}/${sourceId}/${destId}`,
               method: "post",
             });
-            getAllCategories();
+            // getAllCategories();
           }}
         >
           <Droppable droppableId="droppable-1">
