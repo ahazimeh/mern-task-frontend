@@ -103,7 +103,6 @@ function Categories() {
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div>Woohoo, you're reading this text in a modal!</div>
           <div className="form-group">
             <label htmlFor="exampleInputEmail1">Category Name</label>
             <input

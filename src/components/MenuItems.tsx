@@ -7,10 +7,6 @@ type CategoryProps = {
   index: number;
 };
 const MenuItems: React.FC<CategoryProps> = ({ cat, elements, index }) => {
-  console.log(cat.image);
-  const executeScroll = (i: number) => {
-    elements[i]?.current?.scrollIntoView({ behavior: "smooth" });
-  };
   return (
     <Fragment key={cat._id}>
       {!!index && (
