@@ -15,7 +15,7 @@ const SingleCategory: React.FC<CategoryProps> = ({
   removeCategory,
 }) => {
   return (
-    <tr key={cat._id}>
+    <>
       <td>{cat._id}</td>
       <td>{cat.name}</td>
       <td>
@@ -32,7 +32,7 @@ const SingleCategory: React.FC<CategoryProps> = ({
           </div>
         </div>
       </td>
-    </tr>
+    </>
   );
 };
 export default SingleCategory;

@@ -6,6 +6,13 @@ import axios from "../api/axios";
 import NavBar from "./NavBar";
 import { Category } from "../types";
 import SingleCategory from "./SingleCategory";
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+  DroppableProvided,
+  DroppableStateSnapshot,
+} from "react-beautiful-dnd";
 
 function Categories() {
   const [show, setShow] = useState(false);
@@ -136,19 +143,56 @@ function Categories() {
             <th>items</th>
           </tr>
         </thead>
-        <tbody>
-          {menu?.map((cat: Category, index: number) => {
-            return (
-              <SingleCategory
-                handleShow={handleShow}
-                removeCategory={removeCategory}
-                index={index}
-                cat={cat}
-                key={cat._id}
-              />
-            );
-          })}
-        </tbody>
+        <DragDropContext
+          onDragEnd={(param) => {
+            console.log("aa");
+            const srcI = param.source.index;
+            const desI = param.destination?.index || -1;
+            if (desI === -1) return;
+          }}
+        >
+          <Droppable droppableId="droppable-1">
+            {(
+              provided: DroppableProvided,
+              snapshot: DroppableStateSnapshot
+            ) => (
+              <tbody ref={provided.innerRef} {...provided.droppableProps}>
+                {menu?.map((cat: Category, index: number) => {
+                  return (
+                    <Draggable
+                      key={cat._id}
+                      draggableId={`draggable-${cat._id}`}
+                      index={index}
+                    >
+                      {(provided, snapshot) => (
+                        <tr
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          style={{
+                            ...provided.draggableProps.style,
+                            boxShadow: snapshot.isDragging
+                              ? "0 0 0.4rem #666"
+                              : "none",
+                          }}
+                        >
+                          <SingleCategory
+                            handleShow={handleShow}
+                            removeCategory={removeCategory}
+                            index={index}
+                            cat={cat}
+                            key={cat._id}
+                          />
+                        </tr>
+                      )}
+                    </Draggable>
+                  );
+                })}
+                {provided.placeholder}
+              </tbody>
+            )}
+          </Droppable>
+        </DragDropContext>
       </Table>
     </>
   );
