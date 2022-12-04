@@ -76,7 +76,6 @@ function Items() {
     if (!name) {
       return;
     }
-    // event.preventDefault();
     let formData = new FormData();
     if (image) formData.append("image", image, "image");
     if (name) formData.append("itemName", name);
