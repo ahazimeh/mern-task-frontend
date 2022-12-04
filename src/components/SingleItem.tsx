@@ -15,7 +15,7 @@ const SingleItem: React.FC<CategoryProps> = ({
   removeCategory,
 }) => {
   return (
-    <tr key={item._id}>
+    <>
       <td>{item._id}</td>
       <td>{cat.name}</td>
       <td>{item.name}</td>
@@ -34,7 +34,7 @@ const SingleItem: React.FC<CategoryProps> = ({
           <div onClick={removeCategory.bind(null, item._id)}>delete</div>
         </div>
       </td>
-    </tr>
+    </>
   );
 };
 export default SingleItem;

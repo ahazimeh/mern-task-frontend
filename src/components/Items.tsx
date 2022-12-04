@@ -1,12 +1,19 @@
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import axios from "../api/axios";
 import { useParams } from "react-router-dom";
 import NavBar from "./NavBar";
 import { Item } from "../types";
 import SingleItem from "./SingleItem";
+import {
+  DragDropContext,
+  Droppable,
+  DroppableProvided,
+  DroppableStateSnapshot,
+  Draggable,
+} from "react-beautiful-dnd";
 
 function Items() {
   const [show, setShow] = useState(false);
@@ -173,21 +180,55 @@ function Items() {
             <th>items</th>
           </tr>
         </thead>
-        <tbody>
-          {menu?.items?.map((item: Item, index: number) => {
-            console.log(item);
-            return (
-              <SingleItem
-                cat={menu}
-                item={item}
-                key={item._id}
-                index={index}
-                handleShow={handleShow}
-                removeCategory={removeCategory}
-              />
-            );
-          })}
-        </tbody>
+        <DragDropContext
+          onDragEnd={(param) => {
+            const srcI = param.source.index;
+            const desI = param.destination?.index || -1;
+            if (desI === -1) return;
+          }}
+        >
+          <Droppable droppableId="droppable-1">
+            {(
+              provided: DroppableProvided,
+              snapshot: DroppableStateSnapshot
+            ) => (
+              <tbody ref={provided.innerRef} {...provided.droppableProps}>
+                {menu?.items?.map((item: Item, index: number) => {
+                  return (
+                    <Draggable
+                      key={item._id}
+                      draggableId={`draggable-${item._id}`}
+                      index={index}
+                    >
+                      {(provided, snapshot) => (
+                        <tr
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          style={{
+                            ...provided.draggableProps.style,
+                            boxShadow: snapshot.isDragging
+                              ? "0 0 0.4rem #666"
+                              : "none",
+                          }}
+                        >
+                          <SingleItem
+                            cat={menu}
+                            item={item}
+                            index={index}
+                            handleShow={handleShow}
+                            removeCategory={removeCategory}
+                          />
+                        </tr>
+                      )}
+                    </Draggable>
+                  );
+                })}
+                {provided.placeholder}
+              </tbody>
+            )}
+          </Droppable>
+        </DragDropContext>
       </Table>
     </>
   );
