@@ -22,15 +22,9 @@ function Home() {
     ],
   };
   useEffect(() => {
-    axios
-      .get("categories", {
-        params: {
-          username: "john1904",
-        },
-      })
-      .then(function (response) {
-        console.log(response);
-      });
+    axios.get("categories").then(function (response) {
+      console.log(response);
+    });
   });
   const elementsRef = useRef(
     menu.categories.map(() => createRef<HTMLDivElement>())

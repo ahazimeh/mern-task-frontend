@@ -63,12 +63,7 @@ function Items() {
 
   const getAllCategories = async () => {
     const categories = await axios.get(
-      `http://localhost:8000/categories/${categoryId}`,
-      {
-        params: {
-          username: "john1904",
-        },
-      }
+      `http://localhost:8000/categories/${categoryId}`
     );
     setMenu(categories.data.menu);
   };

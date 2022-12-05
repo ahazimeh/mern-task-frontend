@@ -17,11 +17,7 @@ export function Menu() {
   };
 
   const getAllCategories = async () => {
-    const categories = await axios.get("http://localhost:8000/categories", {
-      params: {
-        username: "john1904",
-      },
-    });
+    const categories = await axios.get("http://localhost:8000/categories");
     setMenu(categories.data.menu);
   };
   return (
