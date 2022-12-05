@@ -67,7 +67,7 @@ function Categories() {
     if (!itemId) {
       await axios({
         url: "addCategory",
-        method: "put",
+        method: "post",
         data: formData,
       });
       getAllCategories();
