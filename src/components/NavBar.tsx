@@ -39,7 +39,9 @@ const NavBar = () => {
               <Navbar.Collapse className="justify-content-end">
                 <Navbar.Text>
                   {localStorage.getItem("token") ? (
-                    <div onClick={handleLogout}>Logout</div>
+                    <div style={{ cursor: "pointer" }} onClick={handleLogout}>
+                      Logout
+                    </div>
                   ) : (
                     ""
                     // <Link to="/login">Login</Link>
