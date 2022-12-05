@@ -133,8 +133,8 @@ function Items() {
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="Price"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
             />
 
             <input
@@ -143,8 +143,8 @@ function Items() {
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="Description"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </div>
           <input type="file" name="image" onChange={(e) => handleFile(e)} />
