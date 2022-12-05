@@ -1,3 +1,5 @@
+import { faPen, faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Category, Item } from "../types";
 
 type CategoryProps = {
@@ -30,8 +32,12 @@ const SingleItem: React.FC<CategoryProps> = ({
       </td>
       <td>
         <div style={{ display: "flex", gap: "20px" }}>
-          <div onClick={handleShow.bind(null, index)}>edit</div>
-          <div onClick={removeCategory.bind(null, item._id)}>delete</div>
+          <div onClick={handleShow.bind(null, index)}>
+            <FontAwesomeIcon style={{ color: "blue" }} icon={faPencil} />
+          </div>
+          <div onClick={removeCategory.bind(null, item._id)}>
+            <FontAwesomeIcon style={{ color: "red" }} icon={faTrash} />
+          </div>
         </div>
       </td>
     </>
